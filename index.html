@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sharliz Najla ♡</title>
+<style>
+:root{--blue:#9bc8e8;--deep:#315b7b;--paper:#fffdf8;--ink:#45576a}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Georgia,serif;color:var(--ink);background:linear-gradient(135deg,#b8d9ef,#e8f3fa);display:flex;justify-content:center;align-items:center;padding:24px;overflow-x:hidden}
+.wrap{width:min(100%,560px);text-align:center}
+.panel{background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:28px 22px;box-shadow:0 18px 50px #42678325}
+.kicker{font:12px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:#6387a2}
+h1{font-size:clamp(30px,8vw,46px);font-weight:normal;margin:12px 0;color:var(--deep)}
+p{line-height:1.7}
+.countdown{display:flex;justify-content:center;gap:10px;margin:24px 0}
+.time{background:#fff;border:1px solid #d7e7f2;border-radius:14px;padding:12px 8px;min-width:66px}
+.time strong{display:block;font: bold 25px Arial;color:#477392}
+.time span{font:10px Arial;letter-spacing:1px;color:#7893a8}
+button{border:0;border-radius:999px;padding:13px 24px;background:#477da2;color:white;font-size:14px;letter-spacing:.5px;cursor:pointer;box-shadow:0 7px 18px #477da233;transition:.2s}
+button:hover{transform:translateY(-2px);background:#315f80}
+button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.hidden{display:none!important}
+.gift{font-size:58px;margin:12px 0;animation:float 2s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+.section{margin-top:18px}
+.jukebox{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;background:#f4f9fc;border:1px dashed #9bbbd1;border-radius:16px;padding:15px}
+select{max-width:100%;padding:10px;border:1px solid #c6d9e7;border-radius:10px;background:white;color:#405d73}
+.note{margin-top:18px;text-align:left;background:var(--paper);border:2px dashed #9bc3df;border-radius:8px;padding:25px 22px;box-shadow:0 8px 20px #4c71851a;background-image:repeating-linear-gradient(transparent 0 31px,#dceaf2 32px)}
+.note h2{font-size:25px;font-weight:normal;margin:0 0 16px;color:#3c6e91}
+.note p{white-space:pre-line;margin:0 0 16px;line-height:2}
+.signature{text-align:right;font-style:italic}
+.small{font:12px Arial,sans-serif;color:#7893a8;margin-top:18px}
+.heart{color:#d77d9c}
+@media(max-width:390px){.countdown{gap:5px}.time{min-width:58px;padding:10px 5px}.time strong{font-size:21px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="panel" id="intro">
+    <div class="kicker">a little something for you</div>
+    <h1>Sharliz Najla's Special Day</h1>
+    <p>There's a little surprise waiting for you <span class="heart">♡</span></p>
+    <div class="countdown" id="countdown">
+      <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
+      <div class="time"><strong id="hours">00</strong><span>HOURS</span></div>
+      <div class="time"><strong id="minutes">00</strong><span>MINUTES</span></div>
+      <div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
+    </div>
+    <p id="countLabel" class="small">counting down to your special day</p>
+    <div class="gift">🎁</div>
+    <button id="openBtn">Open Your Gift ♡</button>
+  </section>
+
+  <section id="surprise" class="hidden">
+    <div class="panel">
+      <div class="kicker">made with love</div>
+      <h1>Happy Birthday!</h1>
+      <p>Today is all about you <span class="heart">♡</span></p>
+      <div class="section jukebox">
+        <span>♫ Jukebox</span>
+        <select id="songSelect" aria-label="Pilih lagu">
+          <option value="">Pilih lagu...</option>
+          <option value="song1.mp3">Song 1</option>
+          <option value="song2.mp3">Song 2</option>
+          <option value="song3.mp3">Song 3</option>
+          <option value="song4.mp3">Song 4</option>
+        </select>
+        <button id="playBtn" type="button">Play</button>
+        <audio id="player" loop></audio>
+      </div>
+      <article class="note">
+        <h2>Dear Sharliz Najla...</h2>
+        <p>Happy birthday yaa!
+
+Semoga di umur yang baru ini, hal-hal baik selalu datang ke kamu. Semoga semua yang sedang kamu usahakan dimudahkan, apa yang kamu impikan bisa satu per satu terwujud, dan kamu selalu punya alasan untuk bahagia.
+
+Thank you for being you. I hope your day is as lovely and special as you are. Jangan lupa bahagia hari ini, dan seterusnya.
+
+With lots of love,</p>
+        <p class="signature">Someone who cares about you ♡</p>
+      </article>
+    </div>
+  </section>
+  <div class="small">a tiny website made just for you <span class="heart">♥</span></div>
+</main>
+<script>
+// GANTI tanggal di bawah: format YYYY-MM-DDTHH:MM:SS
+const birthdayDate = new Date("2026-11-06T00:00:00");
+const $ = id => document.getElementById(id);
+function updateCountdown(){
+  const diff = birthdayDate.getTime() - Date.now();
+  if(diff <= 0){ $("countLabel").textContent = "It's your special day! ♡"; ["days","hours","minutes","seconds"].forEach(id=>$(id).textContent="00"); return; }
+  const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
+  $("days").textContent=String(d).padStart(2,"0");
+  $("hours").textContent=String(h).padStart(2,"0");
+  $("minutes").textContent=String(m).padStart(2,"0");
+  $("seconds").textContent=String(s).padStart(2,"0");
+}
+updateCountdown(); setInterval(updateCountdown,1000);
+$("openBtn").addEventListener("click",()=>{ $("intro").classList.add("hidden"); $("surprise").classList.remove("hidden"); window.scrollTo({top:0,behavior:"smooth"}); });
+$("playBtn").addEventListener("click",async()=>{
+  const player=$("player"), selected=$("songSelect").value;
+  if(!selected){alert("Pilih lagu dulu ya. Upload file MP3 ke folder yang sama dan sesuaikan nama lagunya.");return;}
+  if(player.src && player.src.endsWith(selected) && !player.paused){player.pause();$("playBtn").textContent="Play";return;}
+  player.src=selected;
+  try{await player.play();$("playBtn").textContent="Pause";}catch(e){alert("File lagu belum ditemukan. Pastikan MP3 sudah di-upload ke repository.");}
+});
+$("player").addEventListener("pause",()=>$("playBtn").textContent="Play");
+$("player").addEventListener("play",()=>$("playBtn").textContent="Pause");
+</script>
+</body>
+</html>
